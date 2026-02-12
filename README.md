@@ -189,4 +189,18 @@ If we were to improve the collaboration and development process, we would be muc
 
 Some tools and techniques were less helpful than expected. Extra Fab assets and folders added unnecessary files to the repository, which contributed to our Git LFS bandwidth issues. While the assets themselves were useful, bringing in too many at once created more problems than benefits and slowed the team down.
 
-As we move toward the Beta stage and final release, our focus is on getting everything working cleanly and cohesively. This includes finishing the UI elements such as the leaderboard and main menu, improving zombie actions so things like dying animations look better, making power-up selection feel intuitive, and ensuring the full game loop works from start to finish without breaking. The goal now is stability, clarity, and polish instead of adding new features at the last minute.
+As we move toward the Beta stage and final release, our focus is on getting everything working cleanly and cohesively. This includes finishing the UI elements such as the leaderboard and main menu, improving zombie actions so things like dying animations look better, making power-up selection feel intuitive, and ensuring the full game loop works from start to finish without 
+
+## Module Six Project Log – Team Reflection and Final Release
+
+What parts of the plan did the team perceive to go well in relation to the last stage evaluation?
+
+What parts of the plan did the team perceive to go wrong in relation to the last stage evaluation?
+
+How were the previous evaluations integrated into this latest stage?
+
+What would you do differently to improve the collaboration or development process?
+
+Were there any tools or techniques that you did not find helpful in the success of your project development? Why?
+
+## Module Five Project Log – Team Reflectionbreaking. The goal now is stability, clarity, and polish instead of adding new features at the last minute.
