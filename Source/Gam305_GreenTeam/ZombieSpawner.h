@@ -1,3 +1,4 @@
+
 #pragma once
 
 #include "CoreMinimal.h"
@@ -10,6 +11,7 @@ UCLASS()
 class GAM305_GREENTEAM_API AZombieSpawner : public AActor
 {
 	GENERATED_BODY()
+
 
 public:
 	AZombieSpawner();

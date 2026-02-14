@@ -1,3 +1,4 @@
+
 #include "ZombieSpawner.h"
 
 #include "Kismet/GameplayStatics.h"
@@ -11,6 +12,8 @@ AZombieSpawner::AZombieSpawner()
 }
 
 void AZombieSpawner::BeginPlay()
+
+
 {
 	Super::BeginPlay();
 
