@@ -46,13 +46,19 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Scaling")
 	int32 MaxAlivePerLevel = 5; // linear growth so you don't melt CPU
 
-	// ---- Spawn Direction Bias (spawn mostly behind player) ----
+	// ---- Despawn ----
+
+	// Zombies are destroyed if they are farther than (SpawnRadiusMax * DespawnDistanceMultiplier) from the player.
+	UPROPERTY(EditAnywhere, Category = "Despawn", meta = (ClampMin = "0.5", ClampMax = "10.0"))
+	float DespawnDistanceMultiplier = 2.0f;
+
+	// ---- Spawn Direction Bias ----
 
 	UPROPERTY(EditAnywhere, Category = "Direction")
-	float BackConeHalfAngleDeg = 70.f; // ± degrees around "behind"
+	float BackConeHalfAngleDeg = 70.f; // ± degrees around BaseDir
 
 	UPROPERTY(EditAnywhere, Category = "Direction")
-	float SideBias = 0.35f; // 0 = straight behind, ~0.25-0.45 feels good
+	float SideBias = 0.35f; // 0 = straight, ~0.25-0.45 feels good
 
 	// ---- Runtime ----
 

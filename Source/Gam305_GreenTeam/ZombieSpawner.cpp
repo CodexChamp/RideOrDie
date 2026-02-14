@@ -46,7 +46,7 @@ void AZombieSpawner::TrySpawnWave()
 	if (!PlayerPawn)
 		return;
 
-	// ---- Read CurrentLvl dynamically from pawn (BP variable is fine) ----
+	// ---- Read CurrentLvl dynamically from pawn ----
 	int32 Level = 1;
 
 	static const FName CurrentLvlName(TEXT("CurrentLvl"));
@@ -61,7 +61,6 @@ void AZombieSpawner::TrySpawnWave()
 	Level = FMath::Max(Level, 1);
 
 	// ---- Exponential SpawnPerWave ----
-	// SpawnPerWave (default 2) * 2^(Level-1)
 	int32 DesiredSpawnPerWave = SpawnPerWave * (1 << (Level - 1));
 	DesiredSpawnPerWave = FMath::Clamp(DesiredSpawnPerWave, 1, MaxSpawnPerWave);
 
@@ -109,11 +108,37 @@ bool AZombieSpawner::SpawnOneZombie()
 
 void AZombieSpawner::CompactAliveList()
 {
+	UWorld* World = GetWorld();
+	APawn* PlayerPawn = World ? UGameplayStatics::GetPlayerPawn(World, 0) : nullptr;
+
+	// Despawn threshold: 2x max spawn radius from player/car
+	const float DespawnDist = SpawnRadiusMax * FMath::Max(DespawnDistanceMultiplier, 0.01f);
+	const float DespawnDistSq = DespawnDist * DespawnDist;
+
+
+	const FVector PlayerLoc = PlayerPawn ? PlayerPawn->GetActorLocation() : FVector::ZeroVector;
+
 	for (int32 i = AliveZombies.Num() - 1; i >= 0; --i)
 	{
-		if (!AliveZombies[i].IsValid())
+		APawn* Z = AliveZombies[i].Get();
+
+		// invalid pointer -> remove
+		if (!Z)
 		{
 			AliveZombies.RemoveAtSwap(i, 1, false);
+			continue;
+		}
+
+		// if we have a player, cull far zombies
+		if (PlayerPawn)
+		{
+			const float DistSq = FVector::DistSquared(PlayerLoc, Z->GetActorLocation());
+			if (DistSq > DespawnDistSq)
+			{
+				Z->Destroy();
+				AliveZombies.RemoveAtSwap(i, 1, false);
+				continue;
+			}
 		}
 	}
 }
@@ -130,27 +155,30 @@ bool AZombieSpawner::GetSpawnLocationAroundPlayer(FVector& OutLocation) const
 
 	const FVector PlayerLoc = PlayerPawn->GetActorLocation();
 
-	// ---- Direction bias: spawn mostly behind the pawn ----
+	// ---- Direction bias: mostly in FRONT of the pawn ----
 	const FVector Forward = PlayerPawn->GetActorForwardVector().GetSafeNormal();
 	const FVector Back = (-Forward).GetSafeNormal();
 
+	const float FrontChance = 0.80f; // 80% front spawn, 20% back spawn
+	const bool bFront = (FMath::FRand() < FrontChance);
+	const FVector BaseDir = bFront ? Forward : Back;
+
 	const float Distance = FMath::FRandRange(SpawnRadiusMin, SpawnRadiusMax);
 
-	// random yaw offset inside a cone around Back
+	// random yaw offset inside a cone
 	const float OffsetDeg = FMath::FRandRange(-BackConeHalfAngleDeg, BackConeHalfAngleDeg);
 	const FRotator YawRot(0.f, OffsetDeg, 0.f);
 
-	FVector Dir = YawRot.RotateVector(Back);
+	FVector Dir = YawRot.RotateVector(BaseDir);
 
 	// optional side spread for flanking
-	const FVector Right = FVector::CrossProduct(FVector::UpVector, Back).GetSafeNormal();
+	const FVector Right = FVector::CrossProduct(FVector::UpVector, BaseDir).GetSafeNormal();
 	const float SideSign = (FMath::FRand() < 0.5f) ? -1.f : 1.f;
 	Dir = (Dir + Right * SideSign * SideBias).GetSafeNormal();
 
 	const FVector Candidate = PlayerLoc + (Dir * Distance);
 
 	// ---- Grounding fix ----
-	// Visibility often isn't blocked by Landscape. Use WorldStatic and a larger vertical span.
 	const FVector Start = Candidate + FVector(0.f, 0.f, 5000.f);
 	const FVector End = Candidate - FVector(0.f, 0.f, 10000.f);
 
@@ -160,12 +188,10 @@ bool AZombieSpawner::GetSpawnLocationAroundPlayer(FVector& OutLocation) const
 	FHitResult Hit;
 	if (World->LineTraceSingleByChannel(Hit, Start, End, ECC_WorldStatic, Params))
 	{
-		// Lift so we don't start intersecting terrain
-		const float Lift = 120.f; // bump to 200 if they still clip
+		const float Lift = 120.f;
 		OutLocation = Hit.ImpactPoint + FVector(0.f, 0.f, Lift);
 		return true;
 	}
 
-	// If trace fails, don't spawn (prevents underground spawns)
 	return false;
 }
