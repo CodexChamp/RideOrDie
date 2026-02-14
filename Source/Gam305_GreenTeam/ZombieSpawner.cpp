@@ -61,8 +61,9 @@ void AZombieSpawner::TrySpawnWave()
 	Level = FMath::Max(Level, 1);
 
 	// ---- Exponential SpawnPerWave ----
-	int32 DesiredSpawnPerWave = SpawnPerWave * (1 << (Level - 1));
+	int32 DesiredSpawnPerWave = SpawnPerWave + Level;
 	DesiredSpawnPerWave = FMath::Clamp(DesiredSpawnPerWave, 1, MaxSpawnPerWave);
+
 
 	// ---- Linear MaxAlive scaling ----
 	int32 DesiredMaxAlive = MaxAlive + (MaxAlivePerLevel * (Level - 1));
