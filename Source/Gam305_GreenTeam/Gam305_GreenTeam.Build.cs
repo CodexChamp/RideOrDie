@@ -15,8 +15,12 @@ public class Gam305_GreenTeam : ModuleRules
 			"InputCore",
 			"UMG",
 			"Slate",
-			"SlateCore"
-		});
+			"SlateCore",
+            "AIModule",
+			"NavigationSystem",
+			"GameplayTasks"
+
+        });
 
         PrivateDependencyModuleNames.AddRange(new string[] {  });
 
