@@ -41,7 +41,9 @@ void UWBP_Leaderboard_Cpp::RebuildUI(const TArray<FLeaderboardRuntimeEntry>& Ent
 	int32 WrongClassCount = 0;
 	int32 NoWorldCount = 0;
 
-	for (int32 i = 0; i < Working.Num(); i++)
+	constexpr int32 MaxRows = 10;
+
+	for (int32 i = 0; i < Working.Num() && i < MaxRows; i++)
 	{
 		UWorld* World = GetWorld();
 		if (!World)
