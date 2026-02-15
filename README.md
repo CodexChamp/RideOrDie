@@ -194,17 +194,22 @@ As we move toward the Beta stage and final release, our focus is on getting ever
 ## Module Six Project Log – Team Reflection and Final Release
 
 **What parts of the plan did the team perceive to go well in relation to the last stage evaluation?**
+One of the biggest things that went well was our ability to troubleshoot and adapt once we identified technical bottlenecks. Earlier in development, we ran into serious GitHub issues, especially around version control and file conflicts with Unreal assets. That was a rough moment. But by this stage, we had corrected most of those problems and stabilized our workflow. We improved communication about who was working on what, and we were more conscious of not stepping on each other’s files. Our C++ integration also became more structured instead of experimental. That helped a lot with the zombie spawning system, upgrade management, and overall game state logic. -Rylan Champion
 
 **What parts of the plan did the team perceive to go wrong in relation to the last stage evaluation?**
+What did not go as well was scope control and role clarity. There were moments where multiple team members were editing overlapping systems, which created confusion and unnecessary merges. Adding live code and additional C++ files earlier caused some compatibility issues for teammates who did not have identical environments set up. That slowed momentum. We also underestimated how small changes, like UI adjustments or balancing mechanics, could cascade into bigger refactors. Unreal is powerful, but it is not forgiving when structure is inconsistent. -rylan champion
 
 **How were the previous evaluations integrated into this latest stage?**
+We did actively integrate previous evaluations into this stage. After recognizing our version control issues, we enforced more consistent software versions and started organizing branches more intentionally instead of working directly in main. We also began thinking more about performance and optimization, especially with zombie spawning and collision handling. Earlier feedback about game flow led us to improve the roguelike loop structure and leveling system so it felt more intentional rather than random chaos. Basically, we moved from “it works” to “it works and makes sense.” -rylan champion
 
 **What would you do differently to improve the collaboration or development process?**
+If I could improve our collaboration process moving forward, I would establish clearer ownership boundaries for systems from the start. For example, one person owns UI, one owns AI behavior, one owns core vehicle mechanics, etc. That does not mean no collaboration, but it prevents overlapping edits. I would also implement more frequent mini-sync meetings where we quickly confirm what files we are touching before we touch them. Five minutes of planning can save hours of merging headaches.-rylan champion
 
 I would say a more firm meeting time, but life happens so unexpected situations with family occurs. The scheduled meeting day is Wednesday around  3-4 and we’ve all just happen to be on  Discord Saturday where we would fill in gaps in conversation another member might’ve missed. – Devin C. Tidball
 
 **Were there any tools or techniques that you did not find helpful in the success of your project development? Why?**
+As for tools or techniques that were not helpful, excessive asset imports and unnecessary Fab content created avoidable Git LFS strain. Large unused assets consumed bandwidth and complicated the repository without adding real value. While external asset libraries are useful, we learned that importing everything “just in case” is not a strategy. It is digital clutter.-rylan
 
 I’ll default back to some unused assets that were taking of storage space. We would find an asset pack where we would want 1 or 2 things and there would be a lot of extra items and blueprints that we didn’t utilize just because it didn’t fit the direction of the theme we were going for. – Devin C. Tidball
 
-## Module Five Project Log – Team Reflectionbreaking. The goal now is stability, clarity, and polish instead of adding new features at the last minute.
+Overall, this stage of development felt more stable than earlier ones. We still had technical friction and coordination challenges, but we handled them more professionally and proactively. The project evolved from experimentation into structured development, and that growth is honestly one of the most valuable outcomes of this entire process.
