@@ -193,14 +193,16 @@ As we move toward the Beta stage and final release, our focus is on getting ever
 
 ## Module Six Project Log – Team Reflection and Final Release
 
-What parts of the plan did the team perceive to go well in relation to the last stage evaluation?
+**What parts of the plan did the team perceive to go well in relation to the last stage evaluation?**
 
-What parts of the plan did the team perceive to go wrong in relation to the last stage evaluation?
+**What parts of the plan did the team perceive to go wrong in relation to the last stage evaluation?**
 
-How were the previous evaluations integrated into this latest stage?
+**How were the previous evaluations integrated into this latest stage?**
 
-What would you do differently to improve the collaboration or development process?
+**What would you do differently to improve the collaboration or development process?**
+I would say a more firm meeting time, but life happens so unexpected situations with family occurs. The scheduled meeting day is Wednesday around  3-4 and we’ve all just happen to be on  Discord Saturday where we would fill in gaps in conversation another member might’ve missed. – Devin C. Tidball
 
-Were there any tools or techniques that you did not find helpful in the success of your project development? Why?
+**Were there any tools or techniques that you did not find helpful in the success of your project development? Why?**
+I’ll default back to some unused assets that were taking of storage space. We would find an asset pack where we would want 1 or 2 things and there would be a lot of extra items and blueprints that we didn’t utilize just because it didn’t fit the direction of the theme we were going for. – Devin C. Tidball
 
 ## Module Five Project Log – Team Reflectionbreaking. The goal now is stability, clarity, and polish instead of adding new features at the last minute.
