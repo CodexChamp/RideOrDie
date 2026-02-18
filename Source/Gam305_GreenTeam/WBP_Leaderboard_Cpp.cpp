@@ -6,7 +6,7 @@
 #include "Components/VerticalBox.h"
 #include "Engine/Engine.h"
 
-// FIXME: replace with the REAL header name/path you have in Solution Explorer
+// your row widget
 #include "WBP_LeaderboardRow_Cpp.h"
 
 static void Screen(const FString& Msg, float Time = 6.f)
@@ -64,6 +64,7 @@ void UWBP_Leaderboard_Cpp::RebuildUI(const TArray<FLeaderboardRuntimeEntry>& Ent
 
 		if (UWBP_LeaderboardRow_Cpp* RowCpp = Cast<UWBP_LeaderboardRow_Cpp>(Row))
 		{
+			// Row decides highlight by checking GameState's "last submitted entry"
 			RowCpp->SetRowData(Working[i], i + 1);
 		}
 		else

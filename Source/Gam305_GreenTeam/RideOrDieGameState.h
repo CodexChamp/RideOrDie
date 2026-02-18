@@ -33,6 +33,16 @@ public:
     UFUNCTION(BlueprintCallable)
     const TArray<FLeaderboardRuntimeEntry>& GetLeaderboard() const;
 
+    // Recently submitted run (for UI highlight)
+    UFUNCTION(BlueprintCallable, Category = "Leaderboard")
+    bool HasLastSubmittedEntry() const;
+
+    UFUNCTION(BlueprintCallable, Category = "Leaderboard")
+    FLeaderboardRuntimeEntry GetLastSubmittedEntry() const;
+
+    UFUNCTION(BlueprintCallable, Category = "Leaderboard")
+    bool IsLastSubmittedEntry(const FLeaderboardRuntimeEntry& Entry) const;
+
     // ---------------- Run Timer (GameState owns it) ----------------
     // Call when the run should start (BeginPlay of pawn, or when you unpause into gameplay)
     UFUNCTION(BlueprintCallable)

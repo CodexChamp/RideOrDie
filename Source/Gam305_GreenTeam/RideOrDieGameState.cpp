@@ -35,6 +35,23 @@ const TArray<FLeaderboardRuntimeEntry>& ARideOrDieGameState::GetLeaderboard() co
     return Leaderboard;
 }
 
+// ---------------- Recently submitted (UI highlight) ----------------
+
+bool ARideOrDieGameState::HasLastSubmittedEntry() const
+{
+    return bHasLastSubmittedEntry;
+}
+
+FLeaderboardRuntimeEntry ARideOrDieGameState::GetLastSubmittedEntry() const
+{
+    return LastSubmittedEntry;
+}
+
+bool ARideOrDieGameState::IsLastSubmittedEntry(const FLeaderboardRuntimeEntry& Entry) const
+{
+    return bHasLastSubmittedEntry && IsSameEntry(Entry, LastSubmittedEntry);
+}
+
 // ---------------- Timer API ----------------
 
 void ARideOrDieGameState::StartRunTimer()
@@ -120,6 +137,11 @@ void ARideOrDieGameState::SubmitRun(const FString& Name, float TimeSeconds, floa
     E.TimeSeconds = TimeSeconds;
     E.Highscore = Highscore;
     E.Level = Level;
+
+    // Keep "recently submitted" in sync even for the old API
+    LastSubmittedEntry = E;
+    bHasLastSubmittedEntry = true;
+    LastSubmitWallTimeSeconds = FPlatformTime::Seconds();
 
     Leaderboard.Add(E);
     SortLeaderboard();
